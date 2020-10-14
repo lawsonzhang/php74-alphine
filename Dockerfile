@@ -56,8 +56,3 @@ RUN set -e; \
 RUN mkdir -p /data/logs/php
 
 COPY php.ini /usr/local/etc/php/
-
-COPY . /data/www
-WORKDIR /data/www
-
-CMD [ "php", "a.php" ]
