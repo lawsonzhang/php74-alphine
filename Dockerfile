@@ -23,6 +23,7 @@ RUN set -e; \
         libmcrypt \
         git \
         busybox-extras \
+        imagemagick-dev \
     ; \
     \
     apk add --no-cache --virtual .build-deps \
