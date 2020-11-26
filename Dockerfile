@@ -22,6 +22,7 @@ RUN set -e; \
         libmemcached-libs \
         libmcrypt \
         git \
+        busybox-extras \
     ; \
     \
     apk add --no-cache --virtual .build-deps \
@@ -44,13 +45,14 @@ RUN set -e; \
         pcntl \
         soap \
     && pecl install redis \
+    && pecl install imagick \
     && cd /tmp && pecl download swoole \
     && tar -zxvf swoole* && cd swoole* \
     && phpize \
     && ./configure --enable-openssl --enable-http2 \
     && make -j "$(nproc)" && make install \
     && cd ~ && rm -rf /tmp/swoole* \
-    && docker-php-ext-enable gd mysqli pdo_mysql zip bcmath opcache pcntl soap redis swoole; \
+    && docker-php-ext-enable gd mysqli pdo_mysql zip bcmath opcache pcntl soap imagick redis swoole; \
     apk del .build-deps
 
 RUN mkdir -p /data/logs/php
